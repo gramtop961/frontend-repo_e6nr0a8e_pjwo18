@@ -1,28 +1,39 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import GlobalGradient from './components/GlobalGradient';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import Franchise from './pages/Franchise';
+import EPS from './pages/partners/EPS';
+import India1 from './pages/partners/India1';
+import Findi from './pages/partners/Findi';
+import Hitachi from './pages/partners/Hitachi';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <BrowserRouter>
+      <ScrollToTop />
+      <GlobalGradient />
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 to-white text-slate-900">
+        <Navbar />
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/franchise" element={<Franchise />} />
+            <Route path="/partners/eps" element={<EPS />} />
+            <Route path="/partners/india1" element={<India1 />} />
+            <Route path="/partners/findi" element={<Findi />} />
+            <Route path="/partners/hitachi" element={<Hitachi />} />
+          </Routes>
         </div>
+        <Footer />
       </div>
-    </div>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
