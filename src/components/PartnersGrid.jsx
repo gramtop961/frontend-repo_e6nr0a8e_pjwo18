@@ -1,71 +1,68 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Building2, BadgeCheck, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const partners = [
   {
-    key: 'eps',
-    name: 'EPS (Electronic Payment Services)',
-    to: '/partners/eps',
-    gradient: 'from-blue-500 to-indigo-600',
-    blurb: 'Large footprint, reliable uptime, nationwide reach.'
+    name: 'EPS',
+    blurb: 'Electronic Payment Services — Large-scale ATM deployment across India with robust uptime.',
   },
   {
-    key: 'india1',
     name: 'India1 Payments',
-    to: '/partners/india1',
-    gradient: 'from-emerald-500 to-teal-600',
-    blurb: 'Strong presence in semi-urban and rural markets.'
+    blurb: 'One of the largest white-label ATM networks focused on semi-urban and rural reach.',
   },
   {
-    key: 'findi',
-    name: 'Findi (Formerly AGS)',
-    to: '/partners/findi',
-    gradient: 'from-rose-500 to-pink-600',
-    blurb: 'Enterprise-grade tech and robust services.'
+    name: 'Findi',
+    blurb: 'Innovative fintech-driven ATM solutions with strong service backbone.',
   },
   {
-    key: 'hitachi',
     name: 'Hitachi Payment Services',
-    to: '/partners/hitachi',
-    gradient: 'from-amber-500 to-orange-600',
-    blurb: 'Trusted global brand with advanced security.'
-  }
+    blurb: 'Trusted technology and managed services powering ATMs nationwide.',
+  },
 ];
 
-export default function PartnersGrid({ title = 'Trusted Partner Networks' }) {
+export default function PartnersGrid() {
   return (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between gap-4">
+    <section id="partners" className="py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-end justify-between gap-6 mb-10">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900">{title}</h2>
-            <p className="mt-2 text-slate-600 max-w-3xl">Choose from industry-leading networks. We help you pick the right partner based on your location, footfall potential, and ROI goals.</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">Trusted Partners</h2>
+            <p className="text-slate-600 mt-2 max-w-prose">
+              We collaborate with leading ATM networks to ensure reliability, scale, and solid returns.
+            </p>
           </div>
-          <Link to="/franchise" className="hidden sm:inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50">Compare Plans</Link>
+          <a
+            href="#franchise"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 font-medium text-slate-900 hover:bg-slate-50"
+          >
+            Become a Partner
+          </a>
         </div>
-
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {partners.map((p, idx) => (
-            <motion.div
-              key={p.key}
-              initial={{ opacity: 0, y: 16 }}
+            <motion.a
+              key={p.name}
+              href="#franchise"
+              whileHover={{ y: -4 }}
+              className="group rounded-2xl border border-black/10 bg-white/70 backdrop-blur p-5 shadow-sm hover:shadow-md transition-shadow"
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="group"
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.4, delay: 0.05 * idx }}
             >
-              <Link
-                to={p.to}
-                className="block h-full rounded-2xl border border-slate-200/70 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${p.gradient} text-white grid place-items-center font-bold`}>{p.name.split(' ')[0][0]}</div>
-                <h3 className="mt-4 text-lg font-semibold text-slate-900 group-hover:text-blue-600">{p.name}</h3>
-                <p className="mt-1 text-sm text-slate-600">{p.blurb}</p>
-                <div className="mt-4 inline-flex items-center text-sm font-medium text-blue-700">
-                  Learn more →
-                </div>
-              </Link>
-            </motion.div>
+              <div className="flex items-center justify-between">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-gradient-to-tr from-blue-600 to-cyan-500 text-white">
+                  <Building2 size={18} />
+                </span>
+                <BadgeCheck className="text-emerald-500" size={18} />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">{p.name}</h3>
+              <p className="mt-2 text-sm text-slate-600">{p.blurb}</p>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-slate-900">
+                Learn more <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </motion.a>
           ))}
         </div>
       </div>
